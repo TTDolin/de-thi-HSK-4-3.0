@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Đề thi thử HSK 4 3.0</title>
+<link rel="icon" href="logo.png">
+<style>
+:root{--red:#A33A1C;--gold:#F2C46D;--cream:#FFF8F1;--paper:#FEF3DE;--ink:#3B1F14;--muted:#7A5A4E;--line:#ECC9C0;
+  --ok:#2E8B57;--okbg:#E3F4EA;--bad:#C0392B;--badbg:#FBE4E1;--card:#FFFFFF;
+  --han:"Kaiti SC","STKaiti","KaiTi","Songti SC","Noto Serif SC",serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+[hidden]{display:none!important}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer;color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+.top{background:radial-gradient(130% 120% at 50% 0%,#C4502B 0%,#A23A1C 55%,#6E2511 100%);color:#FFF6EE}
+.top .wrap{display:flex;align-items:center;gap:12px;padding-top:12px;padding-bottom:12px}
+.top img{width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--gold)}
+.top b{display:block;font-size:17px}
+.top small{color:#FCE3C2;font-size:12.5px}
+.top a{color:inherit;text-decoration:none}
+
+/* chữ Hán + pinyin */
+.tx{display:inline-flex;flex-direction:column;align-items:flex-start;vertical-align:bottom}
+.tx .py{font-size:.68em;color:var(--muted);line-height:1.25;letter-spacing:.01em}
+.tx .hz{font-family:var(--han);font-size:1.22em;line-height:1.35}
+body.nopy .tx .py{display:none}
+.c .tx{align-items:center}
+
+/* trang chọn đề */
+.hero{text-align:center;padding:34px 0 10px}
+.hero h1{margin:0 0 6px;font-size:clamp(26px,6vw,38px);color:var(--red)}
+.hero p{margin:0 auto;max-width:560px;color:var(--muted)}
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:24px 0}
+.pick{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 6px 18px rgba(120,40,10,.07)}
+.pick .n{font-family:var(--han);font-size:30px;color:var(--red);line-height:1.1}
+.pick .m{color:var(--muted);font-size:14px;margin:4px 0 12px}
+.pick .best{font-size:13.5px;color:var(--ok);min-height:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:11px 22px;font-weight:700;background:var(--red);color:#fff}
+.btn.alt{background:#fff;color:var(--red);box-shadow:inset 0 0 0 1.5px var(--red)}
+.btn.gold{background:linear-gradient(180deg,#FFE09A,#F0B44C);color:#5A1E0C}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;font-size:14.5px}
+.box b{color:var(--red)}
+label.nm{display:block;max-width:360px;margin:18px auto 0;text-align:left;font-size:14px;color:var(--muted)}
+label.nm input{display:block;width:100%;margin-top:4px;padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:#fff}
+table.hist{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border-radius:12px;overflow:hidden}
+table.hist th{background:var(--red);color:#fff;font-weight:600;text-align:left;padding:8px 10px}
+table.hist td{padding:8px 10px;border-top:1px solid var(--line)}
+
+/* thanh làm bài */
+.bar{position:sticky;top:0;z-index:20;background:rgba(255,248,241,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding-top:8px;padding-bottom:8px}
+.bar .t{font-weight:700;color:var(--red)}
+.bar .clock{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px}
+.bar .prog{flex:1;min-width:80px;height:8px;background:#F3DCD3;border-radius:8px;overflow:hidden}
+.bar .prog i{display:block;height:100%;width:0;background:var(--red);transition:width .2s}
+.bar .cnt{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.player{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%}
+.player audio{flex:1;min-width:200px;height:36px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 11px;font-size:13px;color:var(--red)}
+.chip:hover,.chip.on{background:var(--paper)}
+
+h2.sec{margin:28px 0 6px;font-size:21px;color:#fff;background:var(--red);border-radius:12px;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+h2.sec small{font-size:13px;color:var(--gold);font-weight:600}
+.part{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:14px 0;overflow:hidden;box-shadow:0 4px 14px rgba(120,40,10,.05)}
+.part>header{padding:10px 16px;background:var(--paper);border-bottom:1px solid var(--line)}
+.part>header b{color:var(--red)}
+.part>header span{display:block;font-size:13.5px;color:var(--muted)}
+.ex{margin:10px 16px 0;padding:8px 12px;border-left:3px solid var(--gold);background:#FFFBF2;font-size:14px;color:var(--muted);border-radius:0 8px 8px 0}
+.ex .tx .hz{font-size:1.1em}
+.ex em{font-style:normal;font-weight:700;color:var(--red)}
+
+/* kho hình A–F dùng chung */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 16px 4px}
+.gal figure{margin:0;position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;aspect-ratio:4/3;display:grid;place-items:center}
+.gal figure img{max-height:100%;width:auto;max-width:100%;object-fit:contain}
+.gal figcaption{position:absolute;left:6px;top:6px;width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;display:grid;place-items:center;font-size:15px}
+.gal figure.used{opacity:.45}
+.gal figure.used::after{content:"ví dụ";position:absolute;right:6px;top:8px;font-size:11.5px;background:var(--muted);color:#fff;border-radius:6px;padding:1px 6px}
+/* kho câu trả lời / từ */
+.bank{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;padding:12px 16px 4px}
+.bank.words{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
+.bank div{display:flex;align-items:flex-end;gap:10px;background:#FFFBF2;border:1px solid var(--line);border-radius:10px;padding:6px 10px}
+.bank div b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:14px;margin-bottom:3px}
+.bank div.used{opacity:.45}
+.bank div.used::after{content:"ví dụ";margin-left:auto;font-size:11.5px;color:var(--muted);align-self:center}
+
+/* câu hỏi */
+.qs{padding:6px 16px 14px}
+.q{padding:12px 0;border-top:1px dashed var(--line)}
+.q:first-child{border-top:0}
+.qh{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px}
+.qh .no{flex:none;font-weight:800;color:var(--red);font-variant-numeric:tabular-nums;min-width:32px;padding-bottom:2px}
+.qh .sent{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.qh .star{color:var(--red);margin-right:4px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;padding-left:42px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:999px;min-width:44px;height:44px;padding:0 4px;font-weight:700;display:inline-grid;place-items:center;transition:background .12s,border-color .12s}
+.opt:hover{border-color:var(--red)}
+.opt.sel{background:var(--red);border-color:var(--red);color:#fff}
+.opt:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+/* lựa chọn dạng chữ */
+.opts.txt{display:grid;grid-template-columns:repeat(3,1fr)}
+.opt.t{border-radius:12px;height:auto;min-height:56px;padding:6px 10px;justify-content:start;display:flex;align-items:center;gap:8px;text-align:left;font-weight:400}
+.opt.t>b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--paper);color:var(--red);display:grid;place-items:center;font-size:14px}
+.opt.t.sel{color:#fff}.opt.t.sel>b{background:#fff;color:var(--red)}.opt.t.sel .py{color:#FCE3C2}
+/* lựa chọn dạng hình */
+.opts.pic{display:grid;grid-template-columns:repeat(3,1fr)}
+.opt.p{height:auto;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:4px;align-items:center}
+.opt.p img{aspect-ratio:4/3;object-fit:contain;width:100%;border-radius:6px;background:#fff}
+.opt.p>b{width:26px;height:26px;border-radius:50%;background:var(--paper);color:var(--red);display:grid;place-items:center;font-size:14px}
+.opt.p.sel{background:#fff;box-shadow:0 0 0 3px var(--red)}.opt.p.sel>b{background:var(--red);color:#fff}
+/* sau khi chấm */
+.done .opt{cursor:default}
+.done .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);box-shadow:none}
+.done .opt.sel.right{background:var(--ok);color:#fff}
+.done .opt.p.right{background:var(--okbg)}.done .opt.p.right>b{background:var(--ok);color:#fff}
+.done .opt.sel.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
+.done .opt.p.sel.wrong{background:var(--badbg);box-shadow:0 0 0 3px var(--bad)}.done .opt.p.sel.wrong>b{background:var(--bad)}
+.done .opt.t.right .py{color:var(--ok)}
+.fb{display:none;margin:8px 0 0 42px;font-size:14px;border-radius:10px;padding:8px 12px}
+.done .fb{display:block}
+.fb.ok{background:var(--okbg);color:var(--ok)}.fb.no{background:var(--badbg);color:var(--bad)}
+.fb .script{display:block;color:var(--ink);margin-top:4px;font-family:var(--han);font-size:16px}
+.fb .replay{margin-left:8px;border:1px solid currentColor;background:#fff;border-radius:999px;padding:1px 10px;font-size:13px}
+
+.submit{text-align:center;margin:28px 0 50px}
+.submit p{color:var(--muted);font-size:14px}
+.result{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 18px;margin:22px 0;text-align:center;box-shadow:0 8px 24px rgba(120,40,10,.08)}
+.result .big{font-size:52px;font-weight:800;color:var(--red);line-height:1}
+.result .big small{font-size:20px;color:var(--muted)}
+.result .verdict{display:inline-block;margin:10px 0 4px;padding:5px 14px;border-radius:999px;font-weight:700}
+.result .verdict.pass{background:var(--okbg);color:var(--ok)}
+.result .verdict.fail{background:var(--badbg);color:var(--bad)}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0 6px}
+.grid4 div{background:var(--paper);border-radius:12px;padding:10px}
+.grid4 b{display:block;font-size:22px;color:var(--red)}
+.grid4 span{font-size:13px;color:var(--muted)}
+.result .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding:24px 16px 40px}
+@media (max-width:560px){
+  .gal{grid-template-columns:repeat(2,1fr);gap:8px;padding:10px 10px 2px}
+  .qs{padding:4px 10px 12px}.ex{margin:10px 10px 0}.bank{padding:10px 10px 2px}
+  .opts{padding-left:0}.fb{margin-left:0}
+  .opts.txt{grid-template-columns:1fr}
+  .opts.pic{gap:6px}
+  .opt{min-width:40px;height:40px}
+  .opt.t{min-height:48px}
+}
+
+/* bổ sung cho HSK 2–3 */
+.grp{margin:14px 16px 0;font-weight:700;color:var(--red);font-size:14.5px;border-top:1px solid var(--line);padding-top:12px}
+.part>header+.grp,.ex+.grp{border-top:0;padding-top:0}
+.bank .hz.big{font-size:1.7em}
+img.tile{height:100px;width:auto;max-width:none;align-self:flex-start;border-radius:6px}
+img.tile.ex{height:54px;margin-top:6px}
+.wr{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding-left:42px}
+.wr .hint{font-size:14px;color:var(--muted)}
+.wr .hint b{color:var(--red);font-size:17px}
+.wri{width:76px;height:64px;text-align:center;font-family:var(--han);font-size:34px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+.wri:focus{outline:0;border-color:var(--red);box-shadow:0 0 0 3px rgba(163,58,28,.15)}
+.wri.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);opacity:1}
+.wri.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad);opacity:1}
+.fb .hzk{font-family:var(--han);font-size:22px}
+.fb .script{line-height:1.6}
+.grid4.sm{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px;margin-top:0}
+.grid4.sm div{padding:7px}.grid4.sm b{font-size:17px}.grid4.sm span{font-size:12px}
+.histw{overflow-x:auto;border-radius:12px}
+.chip{white-space:nowrap}
+#chips{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:560px){.chip{font-size:12px;padding:3px 8px}#chips{gap:4px}.wr{padding-left:0}.grp{margin:12px 10px 0}img.tile{height:72px}}
+
+/* bổ sung cho HSK 3 (không có pinyin) */
+.hz{font-family:var(--han);font-size:1.22em;line-height:1.5}
+.ex .hz{font-size:1.1em}
+.bank div{align-items:center}.bank div b{margin-bottom:0}
+.opt.t .hz{line-height:1.35}
+.qh{align-items:flex-start}.qh .no{padding-top:4px}
+.gal figure img{width:100%;height:100%;max-height:none;object-fit:contain}
+.psg{margin:10px 16px 0;padding:12px 14px;background:#FFFBF2;border:1px solid var(--line);border-radius:12px;line-height:1.7}
+.warn{margin:12px 0;padding:10px 14px;border-radius:12px;background:#FFF1D6;border:1px solid #E9B44C;color:#7A4A00;font-size:14.5px}
+.pnote{font-size:13px;color:#7A4A00;background:#FFF1D6;border-radius:8px;padding:3px 8px;display:inline-block;margin-bottom:6px}
+.pw{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.pw img{height:150px;width:auto;max-width:60%;border-radius:8px;border:1px solid var(--line);background:#fff}
+.pw .word .hz{font-size:1.7em;color:var(--red)}
+.ex .pw img{height:90px}
+.wri.long{width:100%;max-width:560px;height:auto;min-height:64px;text-align:left;font-size:22px;padding:8px 12px;resize:vertical;line-height:1.5}
+.fb.wait{display:block;background:#FFF1D6;color:#7A4A00}
+.fb .self{display:block;margin-top:6px;color:var(--ink)}
+.fb .replay.on{background:currentColor}.fb .replay.on{color:#fff;background:var(--red);border-color:var(--red)}
+.fb .noaud{color:var(--muted);font-size:13px}
+.waitp{font-size:14px;color:#7A4A00;background:#FFF1D6;border-radius:10px;padding:6px 12px;display:inline-block;margin:8px 0 0}
+.waitp a{color:inherit;font-weight:700}
+@media (max-width:560px){.psg{margin:10px 10px 0}.pw img{height:120px}}
+
+/* bổ sung cho HSK 4 */
+.opts.txt.four{grid-template-columns:repeat(2,1fr)}
+.ex .hz{line-height:1.6}
+.wri.long.essay{max-width:none;font-size:20px;min-height:200px}
+.wr .hint.short{color:var(--bad)}
+.pick .n{font-size:26px}
+.fb .self .replay{margin:2px 4px 2px 0}
+@media (max-width:560px){.opts.txt.four{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><a href="#" id="home"><img src="logo.png" alt=""></a><div><b>Tiếng Trung Dolin</b><small>Đề thi thử HSK 4 3.0 · làm bài và chấm điểm trực tuyến</small></div></div></div>
+
+<main id="vHome" class="wrap">
+  <div class="hero">
+    <h1>Đề thi thử HSK 4 3.0</h1>
+    <p>Mỗi đề 70 câu: 32 câu nghe (khoảng 20 phút), 32 câu đọc (30 phút) và 6 câu viết (25 phút). Làm xong bấm <b>Nộp bài</b> để xem điểm, đáp án và lời thoại bài nghe.</p>
+    <label class="nm">Họ và tên học viên<input id="stu" placeholder="VD: Nguyễn Văn An" autocomplete="name"></label>
+  </div>
+  <div class="picks" id="picks"></div>
+  <div class="box"><b>Cách làm bài:</b> bấm ▶ trên thanh nghe ở đầu trang để nghe toàn bộ bài thi như thi thật (mỗi câu chỉ đọc 1 lần, có thời gian chọn đáp án). Bấm các nút <i>Phần 1, Phần 2</i> để nghe lại từ đầu một phần. Bấm vào ô đáp án để chọn, bấm lại để bỏ chọn. Ở phần Viết, gõ chữ Hán vào ô (dùng bàn phím tiếng Trung hoặc viết tay trên điện thoại). Bài làm được lưu tự động trên máy.<br><b>Cách tính điểm:</b> <span id="scoreNote"></span></div>
+  <h3 style="color:var(--red);margin:26px 0 8px">Lịch sử làm bài trên máy này</h3>
+  <div id="hist"></div>
+</main>
+
+<div id="vExam" hidden>
+  <div class="bar"><div class="wrap">
+    <span class="t" id="exTitle"></span>
+    <span class="clock" id="clock">00:00</span>
+    <div class="prog"><i id="progBar"></i></div>
+    <span class="cnt" id="cnt">0/70</span>
+    <div class="player"><audio id="aud" controls preload="metadata"></audio><span id="chips"></span></div>
+  </div></div>
+  <main class="wrap">
+    <div id="resultTop"></div>
+    <div id="paper"></div>
+    <div class="submit" id="submitBox"><p>Kiểm tra lại các câu chưa làm trước khi nộp.</p><button class="btn gold" id="submit">Nộp bài và chấm điểm</button></div>
+  </main>
+</div>
+
+<footer>© Tiếng Trung Dolin · Giáo viên: 杨氏玲 · Nội dung đề trích từ bộ 《中文水平考试 HSK 3.0（四级）全真模拟试卷》 và HSK（四级）样卷</footer>
+
+<script src="data.js"></script>
+<script>
+const L = "ABCDEF", NQ = 70, NL = 32, NR = 64, NW1 = 69;   // 1–32 nghe · 33–64 đọc · 65–69 đặt câu · 70 bài viết
+const MAXW = 5*SCORE.W1 + SCORE.W2, MAX = SCORE.L + SCORE.R + MAXW;
+const SUB = [["Nghe – Phần 1",1,14],["Nghe – Phần 2",15,32],
+  ["Đọc – Phần 1",33,42],["Đọc – Phần 2",43,57],["Đọc – Phần 3",58,64],["Viết – Phần 1",65,69]];
+for (const e of Object.values(EXAMS)) e.key = [...e.key.replace(/\s/g,"")];
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store = {get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}, del(k){try{localStorage.removeItem(k)}catch(e){}}};
+const fmt = s => String(Math.floor(s/60)).padStart(2,"0")+":"+String(Math.floor(s%60)).padStart(2,"0");
+const hz = (t, cls="") => `<span class="hz ${cls}">${esc(t)}</span>`;
+const br = t => esc(t).replace(/　/g,"<br>").replace(/\n/g,"<br>");
+const norm = s => String(s||"").replace(/\s/g,"");
+const loose = s => norm(s).replace(/[，。！？、,.!?；;：:“”"']/g,"");
+const hanCount = s => (String(s||"").match(/[㐀-鿿]/g)||[]).length;
+let cur = null, ans = {}, t0 = 0, tick = null, done = false, res = null;
+
+/* ---------- dựng đề ---------- */
+const btns = (n, used, cnt=6) => `<div class="opts">${[...L.slice(0,cnt)].map(o=>`<button class="opt" data-n="${n}" data-o="${o}" ${o===used?"disabled title='Đã dùng ở ví dụ'":""}>${o}</button>`).join("")}</div>`;
+const txtOpts = (n, arr) => `<div class="opts txt four">${arr.map((t,i)=>`<button class="opt t" data-n="${n}" data-o="${L[i]}"><b>${L[i]}</b>${hz(t)}</button>`).join("")}</div>`;
+const fb = n => `<div class="fb" data-fb="${n}"></div>`;
+const bank = (arr, used, cls="") => `<div class="bank ${cls}">${arr.map((t,i)=>`<div class="${L[i]===used?"used":""}"><b>${L[i]}</b>${hz(t)}</div>`).join("")}</div>`;
+const part = (title, hint, inner) => `<section class="part"><header><b>${title}</b><span>${hint}</span></header>${inner}</section>`;
+const q = (n, head, body) => `<div class="q" id="q${n}"><div class="qh"><span class="no">${n}.</span><div class="sent">${head}</div></div>${body}${fb(n)}</div>`;
+const grp = t => `<div class="grp">${t}</div>`;
+const exBox = t => t ? `<div class="ex">Ví dụ: ${hz("").replace("></span>",">"+br(t)+"</span>")}</div>` : "";
+const star = t => `<div><span class="star">★</span>${hz(t)}</div>`;
+const range = (a,b) => Array.from({length:b-a+1},(_,i)=>a+i);
+
+function buildPaper(k){
+  const E = EXAMS[k], X = E.ex || {}; let h = "";
+  if (E.note) h += `<div class="warn">ℹ ${esc(E.note)}</div>`;
+  h += `<h2 class="sec">一、听力 · Nghe<small>Câu 1–32 · ${SCORE.L} điểm</small></h2>`;
+  const lg = (a,b) => E.groups.l.filter(g=>g[0]>=a&&g[1]<=b).map(g=>grp(`Câu ${g[0]}–${g[1]}`) + exBox(X[g[2]]) +
+    `<div class="qs">${range(g[0],g[1]).map(n=>q(n,"",txtOpts(n,E.l[n-1]))).join("")}</div>`).join("");
+  h += part("第一部分 · Phần 1","Câu 1–14 · Nghe hội thoại và câu hỏi, chọn đáp án đúng (mỗi câu nghe 1 lần)", lg(1,14));
+  h += part("第二部分 · Phần 2","Câu 15–32 · Nghe một đoạn và câu hỏi, chọn đáp án đúng (câu 20–32: mỗi đoạn có 2–3 câu hỏi)", lg(15,32));
+
+  h += `<h2 class="sec">二、阅读 · Đọc<small>Câu 33–64 · ${SCORE.R} điểm</small></h2>`;
+  const A = E.r1a, B = E.r1b, distr = A.used ? "" : " (có 1 từ thừa)";
+  h += part("第一部分 · Phần 1","Câu 33–42 · Chọn từ điền vào chỗ trống" + distr,
+    grp("Câu 33–37") + bank(A.bank,A.used,"words") + exBox(X.r1a) + `<div class="qs">${A.items.map((s,i)=>q(33+i,hz(s),btns(33+i,A.used))).join("")}</div>` +
+    grp("Câu 38–42") + bank(B.bank,B.used,"words") + exBox(X.r1b) + `<div class="qs">${B.items.map((ss,i)=>q(38+i,ss.map(s=>hz(s)).join(""),btns(38+i,B.used))).join("")}</div>`);
+  let n = 51;
+  h += part("第二部分 · Phần 2","Câu 43–57 · Đọc đoạn văn, chọn đáp án đúng cho câu hỏi có dấu ★",
+    grp("Câu 43–50") + `<div class="qs">${E.r2.map((it,i)=>q(43+i, hz(it.s) + star(it.q), txtOpts(43+i,it.o))).join("")}</div>` +
+    E.r2p.map(p=>{ const a=n; n+=p.qs.length; return grp(`Câu ${a}–${n-1}`) + `<div class="psg">${hz(p.s)}</div><div class="qs">${p.qs.map((it,i)=>q(a+i, star(it.q), txtOpts(a+i,it.o))).join("")}</div>` }).join(""));
+  n = 58;
+  h += part("第三部分 · Phần 3","Câu 58–64 · Chọn câu điền vào chỗ trống trong đoạn văn",
+    E.r3.map(p=>{ const a=n, c=p.bank.length; n+=c; return grp(`Câu ${a}–${n-1}`) + `<div class="psg">${hz(p.s)}</div>` + bank(p.bank,"") +
+      `<div class="qs">${range(a,n-1).map(m=>q(m,`<span style="color:var(--muted);font-size:14px">Chỗ trống (${m})</span>`,btns(m,"",c))).join("")}</div>` }).join(""));
+
+  h += `<h2 class="sec">三、写作 · Viết<small>Câu 65–70 · ${MAXW} điểm</small></h2>`;
+  h += part("第一部分 · Phần 1","Câu 65–69 · Nhìn hình, dùng từ cho sẵn để đặt câu (sau khi nộp bài, so với câu mẫu rồi tự chấm hoặc nhờ giáo viên chấm)",
+    `<div class="qs">${E.w.map((w,i)=>q(65+i, `<div class="pw"><img loading="lazy" src="pic/d${k}_w_${65+i}.jpg" alt="Hình câu ${65+i}"><span class="word">${hz(w)}</span></div>`,
+      `<div class="wr"><textarea class="wri long" data-n="${65+i}" rows="2" autocomplete="off" autocapitalize="off" spellcheck="false" lang="zh-CN" placeholder="Viết một câu có từ “${esc(w)}”" aria-label="Câu ${65+i}: đặt câu"></textarea></div>`)).join("")}</div>`);
+  h += part("第二部分 · Phần 2","Câu 70 · Viết đoạn văn ngắn (ít nhất 80 chữ Hán)",
+    `<div class="qs">${q(70, hz(E.essay),
+      `<div class="wr"><textarea class="wri long essay" data-n="70" rows="8" autocomplete="off" autocapitalize="off" spellcheck="false" lang="zh-CN" placeholder="Viết bài ở đây…" aria-label="Câu 70: viết đoạn văn"></textarea><span class="hint" id="essayCnt">0 chữ Hán</span></div>`)}</div>`);
+  return h;
+}
+
+/* ---------- trang chủ ---------- */
+function renderHome(){
+  $("#stu").value = store.get("hsk4_name","");
+  $("#scoreNote").innerHTML = `Nghe ${SCORE.L} điểm (32 câu) + Đọc ${SCORE.R} điểm (32 câu) + Viết ${MAXW} điểm (5 câu đặt câu × ${SCORE.W1} điểm, bài viết ${SCORE.W2} điểm) = ${MAX} điểm · Đạt từ ${SCORE.pass} điểm. Phần Viết được chấm theo câu mẫu: tự chấm hoặc giáo viên chấm sau khi nộp bài.`;
+  const H = store.get("hsk4_hist",[]);
+  $("#picks").innerHTML = Object.entries(EXAMS).map(([k,e])=>{
+    const best = H.filter(h=>h.exam==k).reduce((m,h)=>Math.max(m,h.total),-1);
+    const draft = Object.keys(store.get("hsk4_draft_"+k,{})).length;
+    return `<div class="pick"><div class="n">${esc(e.name)}</div><div class="m">HSK 4 3.0 · ${e.title} · ${NQ} câu · khoảng 80 phút</div>
+      <div class="best">${best>=0?`Điểm cao nhất: ${best}/${MAX}`:""}${draft?` <span style="color:var(--muted)">· đang làm dở ${draft}/${NQ} câu</span>`:""}</div>
+      <button class="btn" data-k="${k}">${draft?"Làm tiếp":"Bắt đầu làm"} ${e.title}</button></div>`}).join("");
+  $("#hist").innerHTML = H.length ? `<div class="histw"><table class="hist"><tr><th>Thời gian</th><th>Học viên</th><th>Đề</th><th>Nghe</th><th>Đọc</th><th>Viết</th><th>Tổng</th></tr>${
+    H.slice().reverse().slice(0,15).map(h=>`<tr><td>${h.date}</td><td>${esc(h.name||"–")}</td><td>${EXAMS[h.exam].title}</td><td>${h.L}</td><td>${h.R}</td><td>${h.W}</td><td><b>${h.total}</b></td></tr>`).join("")}</table></div>`
+    : `<p style="color:var(--muted);font-size:14px">Chưa có bài làm nào.</p>`;
+}
+
+function start(k){
+  store.set("hsk4_name",$("#stu").value.trim());
+  cur = k; done = false; res = null; ans = store.get("hsk4_draft_"+k,{});
+  const E = EXAMS[k];
+  $("#exTitle").textContent = "HSK 4 · " + E.title;
+  const a = $("#aud"); a.src = E.audio;
+  $("#chips").innerHTML = E.parts.map((m,i)=>`<button class="chip" data-t="${m}">${E.groups.chips[i]}</button>`).join("");
+  $("#paper").innerHTML = buildPaper(k); $("#paper").classList.remove("done");
+  document.querySelectorAll(".wri").forEach(i=>{ i.value = ans[i.dataset.n]||"" });
+  $("#resultTop").innerHTML = ""; $("#submitBox").hidden = false;
+  paint();
+  $("#vHome").hidden = true; $("#vExam").hidden = false; scrollTo(0,0);
+  t0 = Date.now() - store.get("hsk4_t_"+k,0)*1000;
+  clearInterval(tick); tick = setInterval(()=>{const s=(Date.now()-t0)/1000; $("#clock").textContent=fmt(s); store.set("hsk4_t_"+k,Math.floor(s))},1000);
+  history.replaceState(null,"","#de-"+k);
+}
+
+function paint(){
+  document.querySelectorAll(".opt").forEach(b=>b.classList.toggle("sel", ans[b.dataset.n]===b.dataset.o));
+  const n = Object.keys(ans).length;
+  $("#cnt").textContent = n + "/" + NQ; $("#progBar").style.width = (n/NQ*100) + "%";
+  const c = $("#essayCnt"); if (c){ const m = hanCount(ans[70]); c.textContent = m + " chữ Hán" + (m && m<80 ? " (cần ít nhất 80)" : ""); c.classList.toggle("short", m>0 && m<80) }
+}
+
+function submit(){
+  const left = NQ - Object.keys(ans).length;
+  if (left && !confirm(`Bạn còn ${left} câu chưa làm. Vẫn nộp bài?`)) return;
+  done = true; clearInterval(tick);
+  const E = EXAMS[cur]; const ok = {};   // ok[n] = true/false; câu 65–69: true/false/null (chờ chấm)
+  $("#paper").classList.add("done");
+  for (let n=1;n<=NR;n++){
+    const k = E.key[n-1]; ok[n] = ans[n]===k;
+    document.querySelectorAll(`.opt[data-n="${n}"]`).forEach(b=>{b.classList.toggle("right",b.dataset.o===k); b.classList.toggle("wrong",b.classList.contains("sel")&&!ok[n])});
+    const f = document.querySelector(`[data-fb="${n}"]`);
+    f.className = "fb " + (ok[n]?"ok":"no");
+    f.innerHTML = (ok[n] ? "✓ Đúng" : ans[n] ? `✗ Sai · đáp án đúng: <b>${esc(k)}</b>` : `– Chưa làm · đáp án đúng: <b>${esc(k)}</b>`)
+      + (n<=NL ? `<button class="replay" data-q="${n}">▶ Nghe lại ${E.qt[n-1]===E.qt[n]||E.qt[n-1]===E.qt[n-2]?"đoạn này":"câu này"}</button>` + (E.tx ? `<span class="script">${br(E.tx[n-1])}</span>` : "") : "");
+  }
+  for (let n=65;n<=NW1;n++){
+    document.querySelector(`.wri[data-n="${n}"]`).disabled = true;
+    ok[n] = !ans[n] ? false : loose(ans[n])===loose(E.wkey[n-65]) ? true : null;
+  }
+  document.querySelector(`.wri[data-n="70"]`).disabled = true;
+  res = {ok, essay: ans[70] ? null : 0, secs: Math.floor((Date.now()-t0)/1000), name: store.get("hsk4_name",""), hid: Date.now()};
+  store.del("hsk4_draft_"+cur); store.del("hsk4_t_"+cur);
+  paintSelf(); renderResult();
+  $("#submitBox").hidden = true; scrollTo({top:0,behavior:"smooth"});
+}
+
+function paintSelf(){ // phản hồi cho phần Viết (tự chấm)
+  const E = EXAMS[cur];
+  for (let n=65;n<=NW1;n++){
+    const v = res.ok[n], f = document.querySelector(`[data-fb="${n}"]`), inp = document.querySelector(`.wri[data-n="${n}"]`);
+    inp.classList.toggle("right", v===true); inp.classList.toggle("wrong", v===false);
+    f.className = "fb " + (v===true?"ok":v===false?"no":"wait");
+    f.innerHTML = (v===true ? "✓ Đạt" : v===false ? (ans[n] ? "✗ Chưa đạt" : "– Chưa làm") : "⏳ Chờ chấm: so với câu mẫu rồi chọn Đạt / Chưa đạt")
+      + `<span class="script">Câu mẫu: ${esc(E.wkey[n-65])}</span>`
+      + (ans[n] ? `<span class="self">Tự chấm: <button class="replay ${v===true?"on":""}" data-self="${n}" data-v="1">✓ Đạt</button><button class="replay ${v===false?"on":""}" data-self="${n}" data-v="0">✗ Chưa đạt</button></span>` : "");
+  }
+  const f = document.querySelector(`[data-fb="70"]`), e = res.essay, m = hanCount(ans[70]);
+  f.className = "fb " + (e===null ? "wait" : e>0 ? "ok" : "no");
+  f.innerHTML = (!ans[70] ? "– Chưa làm" : e===null ? `⏳ Chờ chấm · bài viết có ${m} chữ Hán${m<80?" (chưa đủ 80)":""}` : `Điểm bài viết: <b>${e}/${SCORE.W2}</b> · ${m} chữ Hán`)
+    + (E.essayRef ? `<span class="script">Bài mẫu tham khảo:<br>${br(E.essayRef)}</span>` : "")
+    + (ans[70] ? `<span class="self">Chấm điểm bài viết: ${range(0,5).map(i=>Math.round(SCORE.W2*i/5)).map(v=>`<button class="replay ${e===v?"on":""}" data-essay="${v}">${v}</button>`).join("")}</span>` : "");
+}
+
+function renderResult(){
+  const E = EXAMS[cur], ok = res.ok;
+  const cnt = (a,b) => range(a,b).filter(n=>ok[n]===true).length;
+  const nL = cnt(1,NL), nR = cnt(NL+1,NR), nW = cnt(NR+1,NW1);
+  const Ls = Math.round(nL*SCORE.L/32), Rs = Math.round(nR*SCORE.R/32), Ws = nW*SCORE.W1 + (res.essay||0), total = Ls+Rs+Ws;
+  const wait = range(65,NW1).filter(n=>ok[n]===null).concat(res.essay===null?[70]:[]), wrong = range(1,NW1).filter(n=>ok[n]===false).concat(ans[70]?[]:[70]);
+  const H = store.get("hsk4_hist",[]).filter(h=>h.hid!==res.hid);
+  H.push({hid:res.hid,exam:cur,name:res.name,L:Ls,R:Rs,W:Ws,total,date:new Date(res.hid).toLocaleString("vi-VN",{dateStyle:"short",timeStyle:"short"})});
+  store.set("hsk4_hist",H.slice(-50));
+  const pass = total >= SCORE.pass;
+  $("#resultTop").innerHTML = `<div class="result">
+    <div style="color:var(--muted);font-size:14px">${esc(res.name||"Học viên")} · HSK 4 · ${E.title} · thời gian ${fmt(res.secs)}</div>
+    <div class="big" style="margin-top:8px">${total}<small>/${MAX}</small></div>
+    <div class="verdict ${pass?"pass":"fail"}">${pass?"Đạt · 合格":`Chưa đạt · cần từ ${SCORE.pass} điểm`}</div>
+    ${wait.length?`<p class="waitp">Còn ${wait.length} câu Viết chờ chấm (${wait.map(n=>`<a href="#q${n}">${n}</a>`).join(", ")}) — điểm Viết sẽ cộng thêm sau khi chấm.</p>`:""}
+    <div class="grid4">
+      <div><b>${Ls}/${SCORE.L}</b><span>听力 · Nghe (${nL}/32 câu)</span></div>
+      <div><b>${Rs}/${SCORE.R}</b><span>阅读 · Đọc (${nR}/32 câu)</span></div>
+      <div><b>${Ws}/${MAXW}</b><span>写作 · Viết (${nW}/5 câu + bài viết ${res.essay===null?"chờ chấm":res.essay+"/"+SCORE.W2})</span></div>
+    </div>
+    <div class="grid4 sm">${SUB.map(s=>`<div><b>${cnt(s[1],s[2])}/${s[2]-s[1]+1}</b><span>${s[0]}</span></div>`).join("")}</div>
+    ${wrong.length?`<p style="font-size:14px;color:var(--muted)">Câu sai / chưa làm: ${wrong.map(n=>`<a href="#q${n}" style="color:var(--bad)">${n}</a>`).join(", ")}. Câu nghe có ${E.tx?"lời thoại và ":""}nút nghe lại.</p>`:wait.length?"":`<p style="color:var(--ok);font-weight:700">Xuất sắc! Hoàn thành tốt cả ${NQ} câu 🎉</p>`}
+    <div class="acts"><button class="btn" id="again">Làm lại đề này</button><button class="btn alt" id="back">Chọn đề khác</button></div></div>`;
+}
+
+/* ---------- sự kiện ---------- */
+let stopAt = null;
+function seek(t){ // tua chính xác cả khi file nghe chưa tải xong
+  const a = $("#aud");
+  const go = () => { a.currentTime = t; a.play().catch(()=>{}) };
+  if (a.readyState >= 1) go(); else { a.addEventListener("loadedmetadata", go, {once:true}); a.load() }
+}
+function qEnd(E, n){ // kết thúc câu/đoạn chứa câu n: mốc kế tiếp lớn hơn
+  const t = E.qt[n-1];
+  return Math.min(...[...E.qt, ...E.parts, E.end].filter(x => x > t + 1));
+}
+$("#aud").addEventListener("timeupdate",e=>{ if(stopAt && e.target.currentTime>=stopAt){ e.target.pause(); stopAt=null } });
+document.addEventListener("click",e=>{
+  const b = e.target.closest("button,a"); if(!b) return;
+  if (b.dataset.k){ start(b.dataset.k); return }
+  if (b.classList.contains("opt")){ if(done||b.disabled) return; const n=b.dataset.n;
+    if (ans[n]===b.dataset.o) delete ans[n]; else ans[n]=b.dataset.o;
+    store.set("hsk4_draft_"+cur,ans); paint(); return }
+  if (b.classList.contains("chip") && b.dataset.t){ stopAt=null; seek(+b.dataset.t); return }
+  if (b.dataset.q){ const E=EXAMS[cur], n=+b.dataset.q; stopAt = qEnd(E,n) - 0.5; seek(E.qt[n-1]); return }
+  if (b.dataset.self){ res.ok[b.dataset.self] = b.dataset.v==="1"; paintSelf(); renderResult(); return }
+  if (b.dataset.essay){ res.essay = +b.dataset.essay; paintSelf(); renderResult(); return }
+  if (b.id==="submit") submit();
+  if (b.id==="again"){ store.del("hsk4_draft_"+cur); store.del("hsk4_t_"+cur); start(cur) }
+  if (b.id==="back" || b.id==="home"){ e.preventDefault(); goHome() }
+});
+document.addEventListener("input",e=>{
+  const i = e.target; if (!i.classList || !i.classList.contains("wri") || done) return;
+  const v = i.value.trim();
+  if (v) ans[i.dataset.n] = v; else delete ans[i.dataset.n];
+  store.set("hsk4_draft_"+cur,ans); paint();
+});
+function goHome(){ clearInterval(tick); $("#aud").pause(); $("#vExam").hidden=true; $("#vHome").hidden=false; history.replaceState(null,"",location.pathname); renderHome(); scrollTo(0,0) }
+$("#stu").addEventListener("input",e=>store.set("hsk4_name",e.target.value.trim()));
+renderHome();
+const m = location.hash.match(/^#de-(\d)$/); if (m && EXAMS[m[1]]) start(m[1]);
+</script>
+</body>
+</html>
